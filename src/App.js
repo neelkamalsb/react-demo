@@ -1,31 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import  { Navbar, NavbarBrand } from 'reactstrap';
-import Menu from './components/MenuComponent.js';
+import Main from './components/MainComponent.js';
 import './App.css';
-import { DISHES } from './share/dishes.js';
 
 class App extends Component{
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      dishes: DISHES
-    };  
-
-  }
-
-  
-
   render() {
     return (
       <div>
-        <Navbar dark color="primary">
-          <div className="container">
-            <NavbarBrand href='/'>Ristorante Con Fusion</NavbarBrand>
-          </div>
-        </Navbar>
-        <Menu dishes={this.state.dishes}/>
+        <Main />
       </div>
       
     );
@@ -33,3 +14,28 @@ class App extends Component{
 }
 
 export default App;
+
+/*
+States of a component:
+
+i.   Mounting 
+ii.  Updating
+iii. UnMounting
+
+i. Mounting:
+    1. constructor()
+    2. getDerivedStateFromProps()
+    3. render()
+    4. componentDidMount()
+
+ii. Updating:
+    1. getDerivedStateFromProps()
+    2. shouldComponentUpdate()
+    3. render()
+    4. getSnapshotBeforeUpdate()
+    5. componentDidUpdate()
+
+
+
+
+*/
