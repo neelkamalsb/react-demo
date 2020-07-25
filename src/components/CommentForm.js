@@ -56,7 +56,7 @@ class CommentForm extends Component {
                                 <Col md={10}>
                                     <Control.select model=".rating" name="rating" id="rating"
                                     validators={{
-                                        
+                                        required
                                     }}>
                                         <option>Select a Rating</option>
                                         <option>1</option>

@@ -1,6 +1,8 @@
 import React /*, /*this not needed for functional components{ Component } */ from 'react';
 import { Card, CardImg, CardImgOverlay, BreadcrumbItem, Breadcrumb, CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../share/baseUrl';
 
 // 1st way to write function
 function RenderMenuItem({ dish, onClick }) {
@@ -8,7 +10,7 @@ function RenderMenuItem({ dish, onClick }) {
     /*<Card onClick={() => onClick(dish.id)}>*/
     <Card>
         <Link to={`/menu/${dish.id}`}>
-          <CardImg width="100%" object src={dish.image} alt={dish.name} />
+          <CardImg width="100%" object src={baseUrl + dish.image} alt={dish.name} />
           <CardImgOverlay>
             <CardTitle>{dish.name}</CardTitle>
           </CardImgOverlay>
@@ -20,13 +22,33 @@ function RenderMenuItem({ dish, onClick }) {
 
 // 2nd way to write function
 const Menu = (props) => {
-  const menu = props.dishes.map((dish) => {
+  const menu = props.dishes.dishes.map((dish) => {
     return (
       <div key={dish.id} className="col-12 col-md-5 m-1">
         <RenderMenuItem dish={dish} onClick={props.onClick} />
       </div>
     );
   });
+
+  if (props.dishes.isLoading) {
+    return (
+        <div className="container">
+            <div className="row">
+                <Loading />
+            </div>
+        </div>
+    );
+  }
+  else if (props.dishes.errMess) {
+      return (
+          <div className="container">
+              <div className="row">
+                  <h4>{props.errMess}</h4>
+              </div>
+          </div>
+      );
+  }
+  else {
   return (
     <div className="container">
       <div className="row">
@@ -44,6 +66,7 @@ const Menu = (props) => {
       </div>
     </div>
   );
+  }
 }
 
 export default Menu;

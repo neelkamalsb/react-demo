@@ -2,13 +2,15 @@ import React /*, /*this not needed for functional components{ Component } */ fro
 import { Card, CardImg, CardText, CardBody, CardTitle, BreadcrumbItem, Breadcrumb } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../share/baseUrl';
 
 function RenderDish({ dish }) {
     if (dish != null) {
         return (
                 <div className="col-12 col-md-5 m-1">
                     <Card>
-                        <CardImg width="100%" object src={dish.image} alt={dish.name} />
+                        <CardImg width="100%" object src={baseUrl + dish.image} alt={dish.name} />
                         <CardBody>
                             <CardTitle>{dish.name}</CardTitle>
                             <CardText>{dish.description}</CardText>
@@ -54,6 +56,25 @@ function RenderComments({ comments, addComment, dishId }) {
 
 
 const DishDetail = (props) => {
+    if (props.isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    if (props.dish!=null) {
     return (
         <div>
             <div className="container">
@@ -78,6 +99,12 @@ const DishDetail = (props) => {
         
 
     );
+    }
+    else {
+        return (
+            <div></div>
+        );
+    }
 }
 
 export default DishDetail;
