@@ -1,3 +1,6 @@
+This project is my work from React Course on Coursera.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
